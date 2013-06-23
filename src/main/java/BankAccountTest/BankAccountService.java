@@ -18,4 +18,8 @@ public class BankAccountService {
         bankAccountDAO.saveAccount(bankAccount);
         return bankAccount;//To change body of created methods use File | Settings | File Templates.
     }
+
+    public static BankAccount getInfo(String numberAcc) {
+        return null;  //To change body of created methods use File | Settings | File Templates.
+    }
 }
