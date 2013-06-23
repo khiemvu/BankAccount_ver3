@@ -23,4 +23,8 @@ public class BankAccountService {
         BankAccount bankAccount = bankAccountDAO.getInfo(numberAcc);
         return bankAccount;  //To change body of created methods use File | Settings | File Templates.
     }
+
+    public static BankAccount transactionDeposit(String numberAcc, double amount, String des) {
+        return null;  //To change body of created methods use File | Settings | File Templates.
+    }
 }
