@@ -31,7 +31,10 @@ public class BankAccountService {
         return bankAccount;  //To change body of created methods use File | Settings | File Templates.
     }
 
-    public static BankAccount transactionWithdraw(String s, int i, String withdraw) {
-        return null;  //To change body of created methods use File | Settings | File Templates.
+    public static BankAccount transactionWithdraw(String numberAcc, double amount, String des) {
+        BankAccount bankAccount = bankAccountDAO.getInfo(numberAcc);
+        bankAccount.setBalance(bankAccount.getBalance() - amount);
+        bankAccountDAO.saveAccount(bankAccount);
+        return bankAccount;  //To change body of created methods use File | Settings | File Templates.
     }
 }
