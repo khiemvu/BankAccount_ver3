@@ -8,6 +8,7 @@ package BankAccountTest;
  * To change this template use File | Settings | File Templates.
  */
 public class BankAccountDAO {
-    public void saveAccount(BankAccount capture) {
+    public BankAccount saveAccount(BankAccount bankAccount) {
+        return null;  //To change body of created methods use File | Settings | File Templates.
     }
 }

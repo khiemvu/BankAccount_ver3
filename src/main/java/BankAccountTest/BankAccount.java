@@ -8,7 +8,14 @@ package BankAccountTest;
  * To change this template use File | Settings | File Templates.
  */
 public class BankAccount {
+    private String numberAcc;
+    private double balance;
+
+    BankAccount(String numberAcc){
+        this.numberAcc = numberAcc;
+        this.balance = 0;
+    }
     public double getBalance() {
-        return 0;  //To change body of created methods use File | Settings | File Templates.
+        return this.balance;  //To change body of created methods use File | Settings | File Templates.
     }
 }

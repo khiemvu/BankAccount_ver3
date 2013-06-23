@@ -8,9 +8,14 @@ package BankAccountTest;
  * To change this template use File | Settings | File Templates.
  */
 public class BankAccountService {
+    private static BankAccountDAO bankAccountDAO;
     public static void setData(BankAccountDAO bankAccountDAO) {
+        BankAccountService.bankAccountDAO = bankAccountDAO;
     }
 
-    public static void openAccount(String s) {
+    public static BankAccount openAccount(String accNumber) {
+        BankAccount bankAccount = new BankAccount(accNumber);
+        bankAccountDAO.saveAccount(bankAccount);
+        return bankAccount;//To change body of created methods use File | Settings | File Templates.
     }
 }
