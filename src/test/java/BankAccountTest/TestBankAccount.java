@@ -42,22 +42,13 @@ public class TestBankAccount {
         verify(bankAccountDAO).getInfo("0123456789");
         assertEquals(0, bankAccount.getBalance(),0.01);
     }
-    @Test
-    public void testTransactionDeposit(){
-        BankAccount bankAccount = BankAccountService.openAccount("0123456789");
-        when(bankAccountDAO.getInfo("0123456789")).thenReturn(bankAccount);
-        BankAccountService.transactionDeposit("0123456789", 100, "deposit");
 
-        ArgumentCaptor<BankAccount> argumentCaptor = ArgumentCaptor.forClass(BankAccount.class);
-        verify(bankAccountDAO, times(2)).saveAccount(argumentCaptor.capture());
-        assertEquals(100, argumentCaptor.getValue().getBalance(), 0.01);
-    }
     @Test
-    public void testTransactionWithdraw(){
+    public void testTransactionDepositAndWithdraw(){
         BankAccount bankAccount = BankAccountService.openAccount("0123456789");
         when(bankAccountDAO.getInfo("0123456789")).thenReturn(bankAccount);
-        BankAccountService.transactionDeposit("0123456789", 100, "deposit");
-        BankAccountService.transactionWithdraw("0123456789", 50, "withdraw");
+        BankAccountService.transaction("0123456789", 100, "deposit");
+        BankAccountService.transaction("0123456789", -50, "withdraw");
 
         ArgumentCaptor<BankAccount> argumentCaptor = ArgumentCaptor.forClass(BankAccount.class);
         verify(bankAccountDAO, times(3)).saveAccount(argumentCaptor.capture());
