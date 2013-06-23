@@ -6,10 +6,10 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import java.util.List;
+
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -51,6 +51,18 @@ public class TestBankAccount {
         ArgumentCaptor<BankAccount> argumentCaptor = ArgumentCaptor.forClass(BankAccount.class);
         verify(bankAccountDAO, times(2)).saveAccount(argumentCaptor.capture());
         assertEquals(100, argumentCaptor.getValue().getBalance(), 0.01);
+    }
+    @Test
+    public void testTransactionWithdraw(){
+        BankAccount bankAccount = BankAccountService.openAccount("0123456789");
+        when(bankAccountDAO.getInfo("0123456789")).thenReturn(bankAccount);
+        BankAccountService.transactionDeposit("0123456789", 100, "deposit");
+        BankAccountService.transactionWithdraw("0123456789", 50, "withdraw");
+
+        ArgumentCaptor<BankAccount> argumentCaptor = ArgumentCaptor.forClass(BankAccount.class);
+        verify(bankAccountDAO, times(3)).saveAccount(argumentCaptor.capture());
+        List<BankAccount> listAccount = argumentCaptor.getAllValues();
+        assertEquals(50, listAccount.get(2).getBalance(), 0.01);
     }
 
 
