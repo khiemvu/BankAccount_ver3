@@ -18,4 +18,8 @@ public class BankAccount {
     public double getBalance() {
         return this.balance;  //To change body of created methods use File | Settings | File Templates.
     }
+
+    public void setBalance(double balance) {
+        this.balance = balance;//To change body of created methods use File | Settings | File Templates.
+    }
 }
