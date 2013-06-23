@@ -12,7 +12,9 @@ public class BankAccountDAO {
         return null;  //To change body of created methods use File | Settings | File Templates.
     }
 
-    public BankAccount getInfo(BankAccount numberAcc) {
+    public BankAccount getInfo(String numberAcc) {
         return null;  //To change body of created methods use File | Settings | File Templates.
     }
+
+
 }

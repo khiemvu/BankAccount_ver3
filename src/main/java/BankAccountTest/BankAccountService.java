@@ -20,6 +20,7 @@ public class BankAccountService {
     }
 
     public static BankAccount getInfo(String numberAcc) {
-        return null;  //To change body of created methods use File | Settings | File Templates.
+        BankAccount bankAccount = bankAccountDAO.getInfo(numberAcc);
+        return bankAccount;  //To change body of created methods use File | Settings | File Templates.
     }
 }
