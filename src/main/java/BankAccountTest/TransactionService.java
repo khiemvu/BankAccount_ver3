@@ -12,4 +12,9 @@ public class TransactionService
     public static void setupData(TransactionDAO transactionDAO)
     {
     }
+
+    public static void transactionDeposit(String s, long l, int i, String deposit)
+    {
+        //To change body of created methods use File | Settings | File Templates.
+    }
 }
