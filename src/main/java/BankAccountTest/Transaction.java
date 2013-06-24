@@ -1,5 +1,4 @@
 package BankAccountTest;
-
 /**
  * Created with IntelliJ IDEA.
  * User: All_in_one
@@ -9,8 +8,27 @@ package BankAccountTest;
  */
 public class Transaction
 {
+    private String des;
+    private Double balance;
+    private Long timestamp;
+    private String numAcc;
+
+    public Transaction(String numberAcc, long timestamp, double balance, String des)
+    {
+        this.numAcc = numberAcc;
+        this.timestamp = timestamp;
+        this.balance = balance;
+        this.des = des;
+        //To change body of created methods use File | Settings | File Templates.
+    }
+
     public long getTime()
     {
-        return 0;  //To change body of created methods use File | Settings | File Templates.
+        return this.timestamp;  //To change body of created methods use File | Settings | File Templates.
+    }
+
+    public double getBalance()
+    {
+        return this.balance;  //To change body of created methods use File | Settings | File Templates.
     }
 }

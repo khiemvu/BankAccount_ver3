@@ -9,7 +9,7 @@ package BankAccountTest;
  */
 public class TransactionDAO
 {
-    public Transaction saveTransaction(Transaction transaction)
+    public static Transaction saveTransaction(Transaction transaction)
     {
         return null;  //To change body of created methods use File | Settings | File Templates.
     }

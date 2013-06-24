@@ -9,12 +9,16 @@ package BankAccountTest;
  */
 public class TransactionService
 {
+    private static TransactionDAO transactionDAO;
     public static void setupData(TransactionDAO transactionDAO)
     {
+        TransactionService.transactionDAO = transactionDAO;
     }
 
-    public static void transactionDeposit(String s, long l, int i, String deposit)
+    public static Transaction transactionDeposit(String numberAcc, long timestamp, double amount, String deposit)
     {
-        //To change body of created methods use File | Settings | File Templates.
+        Transaction transaction = new Transaction(numberAcc, timestamp, amount, deposit);//To change body of created methods use File | Settings | File Templates.
+        TransactionDAO.saveTransaction(transaction);
+        return transaction;
     }
 }
