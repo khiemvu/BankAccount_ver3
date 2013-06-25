@@ -8,10 +8,10 @@ package BankAccountTest;
  */
 public class Transaction
 {
-    private String des;
-    private Double balance;
-    private Long timestamp;
-    private String numAcc;
+    public String des;
+    public Double balance;
+    public Long timestamp;
+    public String numAcc;
 
     public Transaction(String numberAcc, long timestamp, double balance, String des)
     {

@@ -9,7 +9,7 @@ package BankAccountTest;
  */
 public class TransactionService
 {
-    private static TransactionDAO transactionDAO;
+    public static TransactionDAO transactionDAO;
     public static void setupData(TransactionDAO transactionDAO)
     {
         TransactionService.transactionDAO = transactionDAO;
@@ -20,5 +20,12 @@ public class TransactionService
         Transaction transaction = new Transaction(numberAcc, timestamp, amount, deposit);//To change body of created methods use File | Settings | File Templates.
         TransactionDAO.saveTransaction(transaction);
         return transaction;
+    }
+
+    public static Transaction transactionWithdraw(String numberAcc, long timestamp, double amount, String des)
+    {
+        Transaction transaction = new Transaction(numberAcc, timestamp, -amount, des);
+        TransactionDAO.saveTransaction(transaction);
+        return transaction;  //To change body of created methods use File | Settings | File Templates.
     }
 }
