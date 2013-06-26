@@ -7,8 +7,10 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import java.util.Date;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -49,5 +51,20 @@ public class TestTransaction
         verify(transactionDAO).saveTransaction(transactionRecord.capture());
         assertEquals(timestamp.getTime(), transactionRecord.getValue().getTime());
         assertEquals(10, transactionRecord.getValue().getBalance(), 0.01);
+    }
+    @Test
+    public void testGetAllTransaction(){
+        for(int i = 0; i < 3; i++)
+        {
+            TransactionService.doTransaction("0123456789", 1000L + i, 100+ i, "deposit");
+        }
+
+        ArgumentCaptor<Transaction> transactionArgument = ArgumentCaptor.forClass(Transaction.class);
+        List<Transaction> transactionList = transactionArgument.getAllValues();
+        when(transactionDAO.getAllTransaction("0123456789")).thenReturn(transactionList);
+        when(timestamp.getTime()).thenReturn(1000L);
+        assertEquals(100, transactionList.get(0).getBalance(), 0.01);
+        assertEquals(timestamp.getTime(), transactionList.get(0).getTime());
+
     }
 }
