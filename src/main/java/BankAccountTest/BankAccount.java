@@ -10,10 +10,12 @@ package BankAccountTest;
 public class BankAccount {
     private String numberAcc;
     private double balance;
+    private long time;
 
-    BankAccount(String numberAcc){
+    BankAccount(String numberAcc, long time){
         this.numberAcc = numberAcc;
         this.balance = 0;
+        this.time = time;
     }
     public double getBalance() {
         return this.balance;  //To change body of created methods use File | Settings | File Templates.
@@ -22,4 +24,5 @@ public class BankAccount {
     public void setBalance(double balance) {
         this.balance = balance;//To change body of created methods use File | Settings | File Templates.
     }
+
 }

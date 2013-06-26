@@ -6,6 +6,7 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import java.util.Date;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -21,6 +22,8 @@ import static org.mockito.Mockito.*;
 public class TestBankAccount {
     @Mock
     private BankAccountDAO bankAccountDAO;
+    @Mock
+    private Date timestamp;
     @Before
     public void setUp(){
         MockitoAnnotations.initMocks(this);
@@ -28,14 +31,14 @@ public class TestBankAccount {
     }
     @Test
     public void testOpentAccount(){
-        BankAccountService.openAccount("0123456789");
+        BankAccountService.openAccount("0123456789",100L);
         ArgumentCaptor<BankAccount> argument = ArgumentCaptor.forClass(BankAccount.class);
         verify(bankAccountDAO).saveAccount(argument.capture());
         assertEquals(0, argument.getValue().getBalance(), 0.01);
     }
     @Test
     public void testGetInfoAccount(){
-        BankAccount bankAccount = BankAccountService.openAccount("0123456789");
+        BankAccount bankAccount = BankAccountService.openAccount("0123456789", 100L);
         BankAccountService.getInfo("0123456789");
 
         when(bankAccountDAO.getInfo("0123456789")).thenReturn(bankAccount);
@@ -45,7 +48,7 @@ public class TestBankAccount {
 
     @Test
     public void testTransactionDepositAndWithdraw(){
-        BankAccount bankAccount = BankAccountService.openAccount("0123456789");
+        BankAccount bankAccount = BankAccountService.openAccount("0123456789", 100L);
         when(bankAccountDAO.getInfo("0123456789")).thenReturn(bankAccount);
         BankAccountService.transaction("0123456789", 100, "deposit");
         BankAccountService.transaction("0123456789", -50, "withdraw");
@@ -55,6 +58,15 @@ public class TestBankAccount {
         List<BankAccount> listAccount = argumentCaptor.getAllValues();
         assertEquals(50, listAccount.get(2).getBalance(), 0.01);
     }
+    @Test
+    public void testSaveTimestampWhenOpenAccount(){
+        when(timestamp.getTime()).thenReturn(1000L);
+        BankAccountService.openAccount("0123456789", 1000L);
 
+        ArgumentCaptor<BankAccount> record = ArgumentCaptor.forClass(BankAccount.class);
+        verify(bankAccountDAO).saveAccount(record.capture());
+
+        assertEquals(timestamp.getTime(), record.getValue().getTime());
+    }
 
 }
