@@ -9,8 +9,8 @@ package BankAccountTest;
 public class Transaction
 {
     public String des;
-    public Double balance;
-    public Long timestamp;
+    public double balance;
+    public long timestamp;
     public String numAcc;
 
     public Transaction(String numberAcc, long timestamp, double balance, String des)

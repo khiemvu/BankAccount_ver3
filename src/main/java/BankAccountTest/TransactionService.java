@@ -15,17 +15,11 @@ public class TransactionService
         TransactionService.transactionDAO = transactionDAO;
     }
 
-    public static Transaction transactionDeposit(String numberAcc, long timestamp, double amount, String deposit)
+    public static Transaction doTransaction(String numberAcc, long timestamp, double amount, String deposit)
     {
         Transaction transaction = new Transaction(numberAcc, timestamp, amount, deposit);//To change body of created methods use File | Settings | File Templates.
-        TransactionDAO.saveTransaction(transaction);
+        transactionDAO.saveTransaction(transaction);
         return transaction;
     }
 
-    public static Transaction transactionWithdraw(String numberAcc, long timestamp, double amount, String des)
-    {
-        Transaction transaction = new Transaction(numberAcc, timestamp, -amount, des);
-        TransactionDAO.saveTransaction(transaction);
-        return transaction;  //To change body of created methods use File | Settings | File Templates.
-    }
 }
