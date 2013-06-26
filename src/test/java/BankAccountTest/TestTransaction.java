@@ -10,9 +10,7 @@ import java.util.Date;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -60,6 +58,8 @@ public class TestTransaction
         }
 
         ArgumentCaptor<Transaction> transactionArgument = ArgumentCaptor.forClass(Transaction.class);
+        verify(transactionDAO, times(3)).saveTransaction(transactionArgument.capture());
+
         List<Transaction> transactionList = transactionArgument.getAllValues();
         when(transactionDAO.getAllTransaction("0123456789")).thenReturn(transactionList);
         when(timestamp.getTime()).thenReturn(1000L);
