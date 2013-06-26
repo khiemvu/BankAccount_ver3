@@ -67,4 +67,22 @@ public class TestTransaction
         assertEquals(timestamp.getTime(), transactionList.get(0).getTime());
 
     }
+    @Test
+    public void testGetAllTransactionFromStartTimeToStopTime(){
+        for(int i = 0; i < 5; i++)
+        {
+            TransactionService.doTransaction("0123456789", 1000L + i, 100+ i, "des");
+        }
+
+        ArgumentCaptor<Transaction> transactionArgument = ArgumentCaptor.forClass(Transaction.class);
+        verify(transactionDAO, times(5)).saveTransaction(transactionArgument.capture());
+
+        List<Transaction> transactionList = transactionArgument.getAllValues();
+        when(transactionDAO.getAllTransaction("0123456789", 1000L, 1010L)).thenReturn(transactionList);
+
+        when(timestamp.getTime()).thenReturn(1000L);
+        assertEquals(5, transactionList.size());
+        assertEquals(100, transactionList.get(0).getBalance(), 0.01);
+        assertEquals(timestamp.getTime(), transactionList.get(0).getTime());
+    }
 }
