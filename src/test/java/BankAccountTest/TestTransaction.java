@@ -85,4 +85,22 @@ public class TestTransaction
         assertEquals(100, transactionList.get(0).getBalance(), 0.01);
         assertEquals(timestamp.getTime(), transactionList.get(0).getTime());
     }
+    @Test
+    public void testGetNTransactionNew(){
+        for(int i = 0; i < 3; i++)
+        {
+            TransactionService.doTransaction("0123456789", 1000L + i, 100+ i, "des");
+        }
+
+        ArgumentCaptor<Transaction> transactionArgument = ArgumentCaptor.forClass(Transaction.class);
+        verify(transactionDAO, times(3)).saveTransaction(transactionArgument.capture());
+
+        List<Transaction> transactionList = transactionArgument.getAllValues();
+        when(transactionDAO.getAllTransaction("0123456789", 3)).thenReturn(transactionList);
+
+        when(timestamp.getTime()).thenReturn(1001L);
+        assertEquals(3, transactionList.size());
+        assertEquals(100, transactionList.get(0).getBalance(), 0.01);
+        assertEquals(timestamp.getTime(), transactionList.get(1).getTime());
+    }
 }
