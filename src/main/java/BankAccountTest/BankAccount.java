@@ -25,4 +25,8 @@ public class BankAccount {
         this.balance = balance;//To change body of created methods use File | Settings | File Templates.
     }
 
+    public long getTime()
+    {
+        return this.time;  //To change body of created methods use File | Settings | File Templates.
+    }
 }
